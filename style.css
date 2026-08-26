@@ -816,4 +816,68 @@ button:hover {
     }
 
 }
-```
+/* =================================
+   ❤️ GIFT HEART FLOW
+================================= */
+
+.flow-heart {
+    position: fixed;
+
+    bottom: -60px;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    animation-name: heartFlow;
+
+    animation-timing-function: ease-out;
+
+    animation-fill-mode: forwards;
+
+    user-select: none;
+}
+
+
+@keyframes heartFlow {
+
+    0% {
+        transform:
+            translateY(0)
+            scale(0.4)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+
+    15% {
+        opacity: 1;
+    }
+
+
+    50% {
+        transform:
+            translateY(-50vh)
+            scale(1.2)
+            rotate(12deg);
+
+        opacity: 0.95;
+    }
+
+
+    80% {
+        opacity: 0.7;
+    }
+
+
+    100% {
+        transform:
+            translateY(-115vh)
+            scale(0.7)
+            rotate(-12deg);
+
+        opacity: 0;
+    }
+
+}

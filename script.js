@@ -38,7 +38,9 @@ const sentences = [
 let current = 0;
 
 
-/* Get elements */
+/* =========================
+   SLIDESHOW ELEMENTS
+========================= */
 
 const image = document.getElementById("slideImage");
 const title = document.getElementById("slideTitle");
@@ -48,7 +50,9 @@ const next = document.getElementById("nextBtn");
 const previous = document.getElementById("prevBtn");
 
 
-/* Change photo */
+/* =========================
+   CHANGE SLIDE
+========================= */
 
 function changeSlide() {
 
@@ -61,37 +65,51 @@ function changeSlide() {
 }
 
 
-/* NEXT → */
+/* =========================
+   NEXT →
+========================= */
 
-next.onclick = function () {
+if (next) {
 
-    current = current + 1;
+    next.onclick = function () {
 
-    if (current >= photos.length) {
-        current = 0;
-    }
+        current++;
 
-    changeSlide();
+        if (current >= photos.length) {
+            current = 0;
+        }
 
-};
+        changeSlide();
 
+    };
 
-/* ← PREVIOUS */
-
-previous.onclick = function () {
-
-    current = current - 1;
-
-    if (current < 0) {
-        current = photos.length - 1;
-    }
-
-    changeSlide();
-
-};
+}
 
 
-/* Initial photo */
+/* =========================
+   ← PREVIOUS
+========================= */
+
+if (previous) {
+
+    previous.onclick = function () {
+
+        current--;
+
+        if (current < 0) {
+            current = photos.length - 1;
+        }
+
+        changeSlide();
+
+    };
+
+}
+
+
+/* =========================
+   FIRST PHOTO
+========================= */
 
 changeSlide();
 
@@ -103,16 +121,85 @@ changeSlide();
 const giftButton = document.getElementById("giftBtn");
 const giftMessage = document.getElementById("giftMessage");
 
-if (giftButton) {
+if (giftButton && giftMessage) {
 
     giftButton.onclick = function () {
 
+        /* Open gift */
+
         giftMessage.classList.add("open");
+
+        giftMessage.classList.add("show");
+
+
+        /* Change button */
 
         giftButton.textContent = "❤️ For You, Brother";
 
         giftButton.disabled = true;
 
+
+        /* Start heart animation */
+
+        createHeartFlow();
+
     };
+
+}
+
+
+/* =========================
+   ❤️ HEART FLOW
+========================= */
+
+function createHeartFlow() {
+
+    const totalHearts = 40;
+
+    for (let i = 0; i < totalHearts; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.className = "flow-heart";
+
+        heart.innerHTML = "❤️";
+
+
+        /* Random horizontal position */
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+
+        /* Random size */
+
+        heart.style.fontSize =
+            (18 + Math.random() * 25) + "px";
+
+
+        /* Random animation speed */
+
+        heart.style.animationDuration =
+            (5 + Math.random() * 3) + "s";
+
+
+        /* Random starting delay */
+
+        heart.style.animationDelay =
+            Math.random() * 2 + "s";
+
+
+        document.body.appendChild(heart);
+
+
+        /* Automatically remove heart */
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        }, 9000);
+
+    }
 
 }
